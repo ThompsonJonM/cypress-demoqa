@@ -1,0 +1,23 @@
+{
+  "name": "cypress-demoqa-testing",
+  "version": "1.0.0",
+  "description": "A testing repository using Cypress and the Demo QA website.",
+  "main": "index.js",
+  "dependencies": {
+    "cypress": "^6.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThompsonJonM/cypress-demoqa.git"
+  },
+  "author": "Jonathan Thompson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThompsonJonM/cypress-demoqa/issues"
+  },
+  "homepage": "https://github.com/ThompsonJonM/cypress-demoqa#readme"
+}
