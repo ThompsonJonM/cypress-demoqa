@@ -7,13 +7,14 @@
     "cypress": "^6.2.1",
     "eslint": "^7.18.0",
     "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-cypress": "^2.11.2",
     "eslint-plugin-prettier": "^3.3.1",
     "prettier": "^2.2.1"
   },
   "devDependencies": {},
   "scripts": {
     "open": "npx cypress open",
-    "run": "npx cypress run",
+    "test": "npx cypress run",
     "lint": "eslint . --ext .js,.ts"
   },
   "repository": {
