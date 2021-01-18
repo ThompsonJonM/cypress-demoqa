@@ -4,7 +4,8 @@
   "description": "A testing repository using Cypress and the Demo QA website.",
   "main": "index.js",
   "dependencies": {
-    "cypress": "^6.2.1"
+    "cypress": "^6.2.1",
+    "prettier": "^2.2.1"
   },
   "devDependencies": {},
   "scripts": {
