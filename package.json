@@ -4,11 +4,18 @@
   "description": "A testing repository using Cypress and the Demo QA website.",
   "main": "index.js",
   "dependencies": {
-    "cypress": "^6.2.1"
+    "cypress": "^6.2.1",
+    "eslint": "^7.18.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-cypress": "^2.11.2",
+    "eslint-plugin-prettier": "^3.3.1",
+    "prettier": "^2.2.1"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "open": "npx cypress open",
+    "test": "npx cypress run",
+    "lint": "eslint . --ext .js,.ts"
   },
   "repository": {
     "type": "git",
