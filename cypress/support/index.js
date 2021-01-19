@@ -2,3 +2,4 @@
 
 import './commands';
 import './elements/elementsCommands';
+import './bookstore/bookstoreCommands';
