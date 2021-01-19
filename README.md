@@ -8,13 +8,11 @@ A testing repository using Cypress to automate the Demo QA website and its suite
 4. [Test Plan](#test-plan)
 
 ### Tools Used
-
 - Cypress.io
 - Prettier
 - Eslint
 
 ### Installation
-
 Simply input the following once cloned:
 
 `npm install`
@@ -41,7 +39,6 @@ To run headlessly:
 `npm run test`
 
 ### Test Plan
-
 - Navigation
   - Iterate through each menu selection and verify correct page load
 - Elements
