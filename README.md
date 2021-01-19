@@ -11,6 +11,8 @@ A testing repository using Cypress to automate the Demo QA website and its suite
 - Cypress.io
 - Prettier
 - Eslint
+- Fishery (Planned)
+- Faker (Planned)
 
 ### Installation
 Simply input the following once cloned:
