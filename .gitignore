@@ -1,3 +1,6 @@
+# Project files
+cypress.env.json
+
 # Logs
 logs
 *.log
