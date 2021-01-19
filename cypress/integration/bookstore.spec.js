@@ -14,6 +14,49 @@ describe('DemoQA Book Store App', () => {
     specify('Authenticate via API', () => {
       cy.authenticate(user);
     });
+
+    specify('As a user, I should be able to login', () => {
+      cy.visit(`${Cypress.config('baseUrl')}/login`);
+
+      cy.get('#userForm').within(() => {
+        cy.get('#userName').type(user.username);
+        cy.get('#password').type(user.password);
+
+        cy.get('.text-right').within(() => {
+          cy.get('#login').click();
+        });
+
+        cy.url().should('eq', `${Cypress.config('baseUrl')}/profile`);
+      });
+    });
+
+    specify('As a user, I should receive an error for null input', () => {
+      cy.visit(`${Cypress.config('baseUrl')}/login`);
+
+      cy.get('#userForm').within(() => {
+        cy.get('.text-right').within(() => {
+          cy.get('#login').click();
+        });
+
+        ['userName', 'password'].forEach(($field) => {
+          cy.get(`#${$field}`).should('have.class', 'is-invalid');
+        });
+      });
+    });
+
+    specify('As a user, I should be able to logout', () => {
+      cy.authenticate(user);
+
+      cy.visit(`${Cypress.config('baseUrl')}/profile`);
+
+      cy.clearCookies();
+
+      cy.get('#books-wrapper').within(() => {
+        cy.get('#submit').click();
+      });
+
+      cy.get('.login-wrapper').should('be.visible');
+    });
   });
 
   context('Adding Books', () => {
