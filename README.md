@@ -40,6 +40,16 @@ To run headlessly:
 
 `npm run test`
 
+#### Filtering
+
+To run all API tests:
+
+`CYPRESS_TEST_TAGS=api npm run open` 
+
+To run all UI tests:
+
+`CYPRESS_TEST_TAGS=ui npm run open`
+
 ### Test Plan
 - Navigation
   - Iterate through each menu selection and verify correct page load
