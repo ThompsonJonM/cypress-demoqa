@@ -11,10 +11,6 @@ describe('DemoQA Book Store App', () => {
   };
 
   context('Authentication', () => {
-    specify('Authenticate via API', () => {
-      cy.authenticate(user);
-    });
-
     specify('As a user, I should be able to login', () => {
       cy.visit(`${Cypress.config('baseUrl')}/login`);
 
