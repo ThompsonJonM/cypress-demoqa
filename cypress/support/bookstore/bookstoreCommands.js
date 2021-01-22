@@ -41,6 +41,30 @@ Cypress.Commands.add('addBook', (ISBN) => {
   });
 });
 
+Cypress.Commands.add('addBooks', (collectionOfIsbns) => {
+  cy.getCookie('token').then(($token) => {
+    const token = $token.value;
+
+    cy.getCookie('userID').then(($id) => {
+      const userId = $id.value;
+
+      cy.request({
+        method: 'POST',
+        url: `${Cypress.config('baseUrl')}/BookStore/v1/Books`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: {
+          userId,
+          collectionOfIsbns,
+        },
+      }).then(($response) => {
+        expect($response.status).to.eq(201);
+      });
+    });
+  });
+});
+
 Cypress.Commands.add('deleteBook', (ISBN) => {
   cy.getCookie('token').then(($token) => {
     const token = $token.value;
@@ -57,6 +81,26 @@ Cypress.Commands.add('deleteBook', (ISBN) => {
         body: {
           userId,
           isbn: ISBN,
+        },
+      }).then(($response) => {
+        expect($response.status).to.eq(204);
+      });
+    });
+  });
+});
+
+Cypress.Commands.add('deleteAllBooks', () => {
+  cy.getCookie('token').then(($token) => {
+    const token = $token.value;
+
+    cy.getCookie('userID').then(($id) => {
+      const userId = $id.value;
+
+      cy.request({
+        method: 'DELETE',
+        url: `${Cypress.config('baseUrl')}/BookStore/v1/Books?UserId=${userId}`,
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
       }).then(($response) => {
         expect($response.status).to.eq(204);

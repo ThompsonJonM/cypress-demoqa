@@ -2,7 +2,7 @@
 
 import filterTests from '../../plugins/filterTests';
 
-filterTests(['ui'], () => {
+filterTests(['all', 'ui'], () => {
   describe('DemoQA Book Store App', () => {
     const book = {
       title: 'Designing Evolvable Web APIs with ASP.NET',
@@ -67,10 +67,6 @@ filterTests(['ui'], () => {
         cy.deleteBook(book.ISBN);
       });
 
-      specify('Add a book via API', () => {
-        cy.addBook(book.ISBN);
-      });
-
       specify('As a user, I should be able to add a book to my profile', () => {
         cy.intercept('GET', `${Cypress.config('baseUrl')}/BookStore/v1/Books`, { fixture: 'books.json' }).as(
           'booksMock',
@@ -101,10 +97,6 @@ filterTests(['ui'], () => {
       beforeEach('Add a book', () => {
         cy.authenticate(user);
         cy.addBook(book.ISBN);
-      });
-
-      specify('Delete a book via API', () => {
-        cy.deleteBook(book.ISBN);
       });
 
       specify('As a user, I should be able to delete a book from my profile', () => {

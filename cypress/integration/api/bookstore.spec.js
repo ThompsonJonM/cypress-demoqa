@@ -8,12 +8,23 @@ const faker = require('faker');
  * Note that API does not feature Method Not Allowed protection so we do not
  * test for 405 return.
  */
-filterTests(['api'], () => {
+filterTests(['all', 'api'], () => {
   describe('DemoQA Book Store App', () => {
     const book = {
       title: 'Designing Evolvable Web APIs with ASP.NET',
       ISBN: '9781449337711',
     };
+    const bookCollection = [
+      {
+        isbn: '9781449337711',
+      },
+      {
+        isbn: '9781449331818',
+      },
+      {
+        isbn: '9781593275846',
+      },
+    ];
     const user = {
       username: Cypress.env('bookstoreUser').username,
       password: Cypress.env('bookstoreUser').password,
@@ -138,6 +149,31 @@ filterTests(['api'], () => {
       });
     });
 
+    context('Fetch all Books Tests', () => {
+      beforeEach('Login via API', () => {
+        cy.authenticate(user);
+      });
+
+      context('Successful Tests', () => {
+        specify('Fetch all books via API', () => {
+          cy.getCookie('token').then(($token) => {
+            const token = $token.value;
+
+            cy.request({
+              method: 'GET',
+              url: `${Cypress.config('baseUrl')}/BookStore/v1/Books`,
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }).then(($response) => {
+              expect($response.status).to.eq(200);
+              expect($response.body.books.length).to.eq(8);
+            });
+          });
+        });
+      });
+    });
+
     context('Add Book Tests', () => {
       beforeEach('Login via API', () => {
         cy.authenticate(user);
@@ -213,6 +249,75 @@ filterTests(['api'], () => {
             failOnStatusCode: false,
           }).then(($response) => {
             expect($response.status).to.eq(401);
+          });
+        });
+      });
+    });
+
+    context('Delete All Books Tests', () => {
+      beforeEach('Login via API', () => {
+        cy.authenticate(user);
+        cy.addBooks(bookCollection);
+      });
+
+      context('Successful Tests', () => {
+        specify('Delete all books via API', () => {
+          cy.getCookie('token').then(($token) => {
+            const token = $token.value;
+
+            cy.getCookie('userID').then(($id) => {
+              const userId = $id.value;
+
+              cy.request({
+                method: 'DELETE',
+                url: `${Cypress.config('baseUrl')}/BookStore/v1/Books?UserId=${userId}`,
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }).then(($response) => {
+                expect($response.status).to.eq(204);
+              });
+            });
+          });
+        });
+      });
+
+      context('Failure Tests', () => {
+        afterEach('Delete all books', () => {
+          cy.deleteAllBooks();
+        });
+
+        specify('Delete all books with invalid input', () => {
+          cy.getCookie('token').then(($token) => {
+            const token = $token.value;
+
+            cy.request({
+              method: 'DELETE',
+              url: `${Cypress.config('baseUrl')}/BookStore/v1/Books?UserId=555`,
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+              failOnStatusCode: false,
+            }).then(($response) => {
+              expect($response.status).to.eq(401);
+            });
+          });
+        });
+
+        specify('Delete all books with null authorization', () => {
+          cy.getCookie('userID').then(($id) => {
+            const userId = $id.value;
+
+            cy.request({
+              method: 'DELETE',
+              url: `${Cypress.config('baseUrl')}/BookStore/v1/Books?UserId=${userId}`,
+              headers: {
+                Authorization: null,
+              },
+              failOnStatusCode: false,
+            }).then(($response) => {
+              expect($response.status).to.eq(401);
+            });
           });
         });
       });

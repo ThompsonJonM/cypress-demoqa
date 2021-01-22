@@ -2,7 +2,7 @@
 
 import filterTests from '../../plugins/filterTests';
 
-filterTests(['ui'], () => {
+filterTests(['all', 'ui'], () => {
   describe('DemoQA Elements Page', () => {
     specify('As a user, I should be able to visit the Elements page', () => {
       cy.visit(`${Cypress.config('baseUrl')}/elements`);
