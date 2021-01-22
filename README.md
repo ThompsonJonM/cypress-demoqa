@@ -32,13 +32,11 @@ This repository requires the creation of a `cypress.env.json` populated with a u
 }
 ```
 
-To run via GUI:
-
-`npm run open`
-
-To run headlessly:
-
-`npm run test`
+Run commands:
+- GUI: `npm run open`
+- CLI: `npm run test`
+- API: `CYPRESS_TEST_TAGS=api npm run {test_or_open}`
+- UI: `CYPRESS_TEST_TAGS=ui npm run {test_or_open}`
 
 ### Test Plan
 - Navigation
