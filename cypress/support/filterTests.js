@@ -8,9 +8,8 @@
  * @example npm run open --env tags=api
  */
 const filterTests = (definedTags, runTest) => {
-  if (Cypress.env('TEST_TAGS')) {
-    const tags = Cypress.env('TEST_TAGS').split(',');
-    console.log(tags);
+  if (Cypress.env('tags')) {
+    const tags = Cypress.env('tags').split('/');
     const isFound = definedTags.some((definedTag) => tags.includes(definedTag));
 
     if (isFound) {

@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import filterTests from '../../plugins/filterTests';
+import filterTests from '../../support/filterTests';
 
 filterTests(['all', 'ui'], () => {
   describe('DemoQA Book Store App', () => {

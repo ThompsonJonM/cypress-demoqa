@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import filterTests from '../../plugins/filterTests';
+import filterTests from '../../support/filterTests';
 
 const faker = require('faker');
 
