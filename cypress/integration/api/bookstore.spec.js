@@ -42,6 +42,8 @@ filterTests(['all', 'api'], () => {
             },
           }).then(($response) => {
             expect($response.status).to.eq(200);
+            expect($response.body.token).to.exist;
+            expect($response.body.status).to.eq('Success');
           });
         });
       });

@@ -67,14 +67,19 @@ filterTests(['all', 'ui'], () => {
         cy.deleteBook(book.ISBN);
       });
 
-      specify('As a user, I should be able to add a book to my profile', () => {
-        cy.intercept('GET', `${Cypress.config('baseUrl')}/BookStore/v1/Books`, { fixture: 'books.json' }).as(
-          'booksMock',
-        );
-        cy.visit(`${Cypress.config('baseUrl')}/books`);
-        cy.wait('@booksMock');
+      specify.only('As a user, I should be able to add a book to my profile', () => {
+        cy.intercept('GET', `${Cypress.config('baseUrl')}/BookStore/v1/Books`, ($req) => {
+          $req.reply(($res) => {
+            $res.send({ fixture: 'books.json' });
 
-        cy.contains('a', book.title).click();
+            expect($res.statusCode).to.equal(200);
+            expect($res.statusMessage).to.equal('OK');
+          });
+        }).as('booksRequest');
+        cy.visit(`${Cypress.config('baseUrl')}/books`);
+        cy.wait('@booksRequest');
+
+        cy.contains('a', book.title).should('be.visible').click();
 
         cy.url().should('contain', book.ISBN);
         cy.get('.profile-wrapper').within(() => {
