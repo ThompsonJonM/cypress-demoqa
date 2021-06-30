@@ -70,6 +70,8 @@ filterTests(['all', 'ui'], () => {
       specify.only('As a user, I should be able to add a book to my profile', () => {
         cy.intercept('GET', `${Cypress.config('baseUrl')}/BookStore/v1/Books`, ($req) => {
           $req.reply(($res) => {
+            
+            $res.delay(1000);
             $res.send({ fixture: 'books.json' });
 
             expect($res.statusCode).to.equal(200);

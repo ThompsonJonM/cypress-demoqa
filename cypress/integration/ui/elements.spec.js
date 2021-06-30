@@ -2,7 +2,7 @@
 
 import filterTests from '../../support/filterTests';
 
-filterTests(['all', 'ui'], () => {
+filterTests(['all', 'ui', 'elements'], () => {
   describe('DemoQA Elements Page', () => {
     specify('As a user, I should be able to visit the Elements page', () => {
       cy.visit(`${Cypress.config('baseUrl')}/elements`);
@@ -55,7 +55,7 @@ filterTests(['all', 'ui'], () => {
       });
     });
 
-    context('Buttons Tests', () => {
+    context.only('Buttons Tests', () => {
       const buttonTuple = [
         ['Double Click', 'doubleClickMessage'],
         ['Right Click', 'rightClickMessage'],
@@ -73,7 +73,7 @@ filterTests(['all', 'ui'], () => {
           } else if (clickType === 'Right Click') {
             cy.get('#rightClickBtn').rightclick();
           } else {
-            cy.get('button').last().click();
+            cy.contains('button', /^Click Me$/).click();
           }
 
           cy.get(`#${messageSelector}`).should('be.visible');

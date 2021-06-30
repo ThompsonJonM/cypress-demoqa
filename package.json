@@ -4,7 +4,6 @@
   "description": "A testing repository using Cypress and the Demo QA website.",
   "main": "index.js",
   "dependencies": {
-    "cypress": "^6.2.1",
     "eslint": "^7.18.0",
     "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-cypress": "^2.11.2",
@@ -12,7 +11,10 @@
     "faker": "^5.1.0",
     "prettier": "^2.2.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "cypress": "^7.5",
+    "cypress-repeat": "^2.2.1"
+  },
   "scripts": {
     "open": "npx cypress open",
     "test": "npx cypress run",
