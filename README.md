@@ -37,6 +37,7 @@ Run commands:
 - CLI: `npm run test`
 - API: `CYPRESS_TEST_TAGS=api npm run {test_or_open}`
 - UI: `CYPRESS_TEST_TAGS=ui npm run {test_or_open}`
+- Module API (Elements only): `node .\run-elements-tests.js`
 
 ### Test Plan
 - Navigation
